@@ -1,0 +1,372 @@
+.main{
+   .container{
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      &__buttons{
+         display: flex;
+         column-gap: 25px;
+         margin-top: 20px;
+      }
+      &__results-button{
+         border: 1px solid #4c5b69eb;
+         outline: none;
+         background: none;
+         font-weight: 700;
+         color: #4c5b69eb;
+         padding: 10px 20px;
+         transition: background 0.5s, color 0.5s;
+         &:hover{
+            cursor: pointer;
+            background: #647280eb;
+            color: #ffffff;
+         }
+      }
+      &__results-close-button{
+         border: 1px solid #4c5b69eb;
+         outline: none;
+         background: none;
+         font-weight: 700;
+         color: #4c5b69eb;
+         padding: 10px 20px;
+         transition: background 0.5s, color 0.5s;
+         &:hover{
+            cursor: pointer;
+            background: #647280eb;
+            color: #ffffff;
+         }
+      }
+      &__new-game-button{
+         border: 1px solid #4c5b69eb;
+         outline: none;
+         background: none;
+         font-weight: 700;
+         color: #4c5b69eb;
+         padding: 10px 20px;
+         transition: background 0.5s, color 0.5s;
+         &:hover{
+            cursor: pointer;
+            background: #647280eb;
+            color: #ffffff;
+         }
+      }
+   }
+   
+.minesweeper{
+   background: #bdbdbd;
+   border-bottom: solid 2px #707070;
+   border-right: solid 2px #707070;
+   border-top: solid 2px #fff;
+   border-left: solid 2px #fff;
+   padding: 14px;
+   &__info, .info{
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      padding: 5px;
+      border-bottom: solid 2px #fff;
+      border-right: solid 2px #fff;
+      border-top: solid 2px #7b7b7b;
+      border-left: solid 2px #7b7b7b;
+      &__mines{
+         column-gap: 10px;
+         display: flex;
+         align-items: center;
+         @media screen and (max-width: 750px){
+            column-gap: 2px;
+         }
+      }
+      &__time{
+         column-gap: 10px;
+         display: flex;
+         align-items: center;
+         @media screen and (max-width: 750px){
+            column-gap: 2px;
+         }
+      }
+      &__title{
+         font-size: 16px;
+         font-weight: 400;
+         color: #000;
+         @media screen and (max-width: 750px){
+            font-size: 12px;
+         }
+      }
+      &__number{
+         font-weight: 400;
+         height: 20px;
+         font-size: 16px;
+         background: #333;
+         text-align: center;
+         color: #25fe15;
+         border-bottom: solid 2px #fff;
+         border-right: solid 2px #fff;
+         border-top: solid 2px #7b7b7b;
+         border-left: solid 2px #7b7b7b;
+         padding: 2px;
+         @media screen and (max-width: 750px){
+            font-size: 12px;
+            height: 15px;
+         }
+      }
+      .mine{
+         width: 20px;
+         @media screen and (max-width: 750px){
+            width: 15px;
+         }
+      }
+      .time{
+         width: 40px;
+         @media screen and (max-width: 750px){
+            width: 30px;
+         }
+      }
+   }
+   &__cells-container{
+      display: grid;
+   // grid-template-columns: repeat(10, 25px);
+   // grid-template-rows: repeat(10, 25px);
+      border-spacing: 0;
+      border-bottom: solid 2px #fff;
+      border-right: solid 2px #fff;
+      border-top: solid 2px #7b7b7b;
+      border-left: solid 2px #7b7b7b;
+      // @media screen and (max-width: 750px){
+      //    grid-template-columns: repeat(10, 20px) !important;
+      //    grid-template-rows: repeat(10, 20px) !important;
+      // }
+   }
+   &__cell {
+      width: 25px;
+      height: 25px;
+      font-weight: 700;
+      text-align: center;
+      vertical-align: middle;
+      background-repeat: no-repeat;
+      background: #bdbdbd;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      @media screen and (max-width: 750px){
+         width: 17px !important;
+         height: 17px !important;
+      }
+   }
+ }
+}
+
+.minesweeper__cell.closed{
+   border-bottom: solid 2px #7b7b7b;
+    border-right: solid 2px #7b7b7b;
+    border-top: solid 2px #fff;
+    border-left: solid 2px #fff;
+}
+.minesweeper__cell.opened{
+   border-left: solid 1px #7b7b7b;
+   border-top: solid 1px #7b7b7b;
+   border-bottom: none;
+   border-right: none;
+}
+.minesweeper__cell.bomb{
+   background: none;
+   background: url(../../assets/bomb.png);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-color: #FF0000;
+   border-left: solid 1px #7b7b7b;
+   border-top: solid 1px #7b7b7b;
+   border-bottom: none;
+   border-right: none;
+}
+.minesweeper__cell.closed.flag{
+   background: none;
+   background: url(../../assets/flag.svg);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-color: #00FF00;
+}
+
+.modal-window{
+   max-width: 700px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: auto;
+   &__title{
+      color: #ffffff;
+      text-align: center;
+      max-width: 300px;
+      margin: 25px auto;
+      font-size: 24px;
+      font-weight: 700;
+   }
+   &__info-block{
+      display: flex;
+      justify-content: center;
+      column-gap: 80px;
+   }
+   &__time{
+      color: #ffffff;
+      font-size: 18px;
+   }
+   &__moves{
+      color: #ffffff;
+      font-size: 16px;
+   }
+   &__button{
+      border: 1px solid #ffffff;
+      outline: none;
+      background: none;
+      color: white;
+      padding: 10px 25px;
+      margin: 25px auto;
+      transition: background 0.5s;
+      &:hover{
+         cursor: pointer;
+         background: #647280eb;
+      }
+   }
+}
+// .modal-window.opened{
+//    top: 50%;
+//    left: 50%;
+//    transform: translate(-50%, -50%);
+//    animation-name: open;
+//    animation-duration: 1s;
+
+// }
+// .modal-window.closed{
+//    // display: none;
+//    top: 50%;
+//       left: 0%;
+//       transform:translate(-100%, -50%);
+//    animation-name: close;
+//    animation-duration: 1s;
+// }
+
+@keyframes open {
+   from {
+      // transform:translateX(0%);
+      top: 50%;
+      left: 0%;
+      transform:translate(-100%, -50%);
+   }
+
+   to {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+}
+
+@keyframes close {
+   from {
+      top: 50%;
+      left: 50%;
+      transform:translate(-50%, -50%);
+   }
+
+   to {
+      top: 50%;
+      left: 0%;
+      transform:translate(-100%, -50%);
+   }
+}
+
+.background-modal{
+   width: 100%;
+   height: 100%;
+   background: #778899d6;
+   top:50%;
+   left:50%;
+   transform:translate(-50%, -50%);
+   position: fixed;
+   display: flex;
+   align-items: center;
+}
+
+.background-result{
+   width: 100%;
+   height: 100%;
+   background: #778899d6;
+   top:50%;
+   left:50%;
+   transform:translate(-50%, -50%);
+   position: fixed;
+   display: flex;
+   align-items: center;
+}
+
+.records{
+   max-width: 700px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: auto;
+   // position: fixed;
+   // top:50%;
+   // left:50%;
+   // transform:translate(-50%, -50%);
+   // background: #778899d6;
+   // border-radius: 15px;
+
+   &__title{
+      color: #FFFFFF;
+      font-weight: 700;
+   }
+   &__table-item{
+      color: #FFFFFF;
+      text-align: center;
+      font-weight: 400;
+      font-size: 16px;
+      margin: 40px 0;
+   }
+}
+.background-modal.opened{
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   animation-name: open;
+   animation-duration: 1s;
+
+}
+.background-modal.closed{
+   top: 50%;
+   left: 0%;
+   transform:translate(-100%, -50%);
+   animation-name: close;
+   animation-duration: 1s;
+}
+
+.background-result.opened{
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   animation-name: open;
+   animation-duration: 1s;
+
+}
+.background-result.closed{
+   // display: none;
+   top: 50%;
+   left: 0%;
+   transform:translate(-100%, -50%);
+   animation-name: close;
+   animation-duration: 1s;
+}
+
+// @media screen and (max-width: 750px){
+//    .modal-window{
+//       width: 400px;
+//    }
+// }
+
+// @media screen and (max-width: 450px){
+//    .modal-window{
+//       width: 300px;
+//    }
+// }
